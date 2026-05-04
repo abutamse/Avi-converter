@@ -15,7 +15,7 @@
     --accent2: #47d4ff;
     --text: #f0f0f0;
     --muted: #666680;
-    --error: #ff4747;
+    --error: #ff5555;
     --success: #47ff8a;
   }
 
@@ -31,7 +31,6 @@
     align-items: center;
     justify-content: center;
     padding: 2rem;
-    overflow-x: hidden;
   }
 
   body::before {
@@ -39,8 +38,8 @@
     position: fixed;
     inset: 0;
     background:
-      radial-gradient(ellipse 60% 40% at 20% 20%, rgba(232,255,71,0.04) 0%, transparent 60%),
-      radial-gradient(ellipse 50% 50% at 80% 80%, rgba(71,212,255,0.04) 0%, transparent 60%);
+      radial-gradient(ellipse 60% 40% at 15% 20%, rgba(232,255,71,0.05) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 85% 80%, rgba(71,212,255,0.05) 0%, transparent 60%);
     pointer-events: none;
   }
 
@@ -49,12 +48,10 @@
     max-width: 560px;
     display: flex;
     flex-direction: column;
-    gap: 0;
+    gap: 1rem;
   }
 
-  header {
-    margin-bottom: 2.5rem;
-  }
+  header { margin-bottom: 1rem; }
 
   .tag {
     font-family: 'Space Mono', monospace;
@@ -62,7 +59,7 @@
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--accent);
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.5rem;
   }
 
   h1 {
@@ -72,34 +69,28 @@
     letter-spacing: -0.03em;
   }
 
-  h1 span {
-    color: var(--accent);
-  }
+  h1 span { color: var(--accent); }
 
   .subtitle {
-    margin-top: 0.5rem;
+    margin-top: 0.4rem;
     color: var(--muted);
-    font-size: 0.9rem;
-    font-weight: 400;
+    font-size: 0.85rem;
   }
 
-  /* Drop zone */
   .drop-zone {
     border: 1.5px dashed var(--border);
     border-radius: 12px;
-    padding: 3rem 2rem;
+    padding: 2.5rem 2rem;
     text-align: center;
     cursor: pointer;
     transition: border-color 0.2s, background 0.2s;
     position: relative;
     background: var(--surface);
   }
-
   .drop-zone:hover, .drop-zone.dragover {
     border-color: var(--accent);
     background: rgba(232,255,71,0.03);
   }
-
   .drop-zone input[type="file"] {
     position: absolute;
     inset: 0;
@@ -108,251 +99,96 @@
     width: 100%;
     height: 100%;
   }
+  .drop-icon { font-size: 2.2rem; margin-bottom: 0.8rem; }
+  .drop-label { font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .drop-hint { font-size: 0.75rem; color: var(--muted); font-family: 'Space Mono', monospace; }
 
-  .drop-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    filter: grayscale(1);
-    transition: filter 0.2s;
-  }
-
-  .drop-zone:hover .drop-icon { filter: none; }
-
-  .drop-label {
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 0.3rem;
-  }
-
-  .drop-hint {
-    font-size: 0.8rem;
-    color: var(--muted);
-    font-family: 'Space Mono', monospace;
-  }
-
-  /* File info */
   .file-info {
     display: none;
     align-items: center;
-    gap: 1rem;
-    padding: 1rem 1.2rem;
+    gap: 0.8rem;
+    padding: 0.9rem 1.1rem;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 10px;
-    margin-top: 1rem;
   }
-
-  .file-info.visible { display: flex; }
-
-  .file-icon {
-    font-size: 1.6rem;
-    flex-shrink: 0;
-  }
-
+  .file-info.show { display: flex; }
+  .file-icon { font-size: 1.4rem; flex-shrink: 0; }
   .file-details { flex: 1; min-width: 0; }
-
-  .file-name {
-    font-size: 0.85rem;
-    font-weight: 700;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .file-size {
-    font-size: 0.7rem;
-    color: var(--muted);
-    font-family: 'Space Mono', monospace;
-    margin-top: 0.15rem;
-  }
-
-  .remove-btn {
-    background: none;
-    border: none;
-    color: var(--muted);
-    cursor: pointer;
-    font-size: 1.2rem;
-    padding: 0.3rem;
-    border-radius: 4px;
-    transition: color 0.15s;
-    flex-shrink: 0;
-  }
-
+  .file-name { font-size: 0.85rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .file-size { font-size: 0.7rem; color: var(--muted); font-family: 'Space Mono', monospace; }
+  .remove-btn { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1.1rem; padding: 0.2rem 0.4rem; border-radius: 4px; transition: color 0.15s; }
   .remove-btn:hover { color: var(--error); }
 
-  /* Progress area */
-  .progress-area {
-    display: none;
-    flex-direction: column;
-    gap: 0.6rem;
-    margin-top: 1rem;
-  }
-
-  .progress-area.visible { display: flex; }
-
-  .progress-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-  }
-
-  .progress-label { color: var(--muted); }
-  .progress-pct { color: var(--accent); font-weight: 700; }
-
-  .progress-bar-bg {
-    height: 4px;
-    background: var(--border);
-    border-radius: 99px;
-    overflow: hidden;
-  }
-
-  .progress-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    border-radius: 99px;
-    width: 0%;
-    transition: width 0.3s ease;
-  }
+  .status-box { display: none; flex-direction: column; gap: 0.5rem; }
+  .status-box.show { display: flex; }
+  .status-row { display: flex; justify-content: space-between; align-items: center; font-family: 'Space Mono', monospace; font-size: 0.7rem; }
+  .status-label { color: var(--muted); }
+  .status-pct { color: var(--accent); font-weight: 700; }
+  .progress-bg { height: 3px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); width: 0%; transition: width 0.4s ease; border-radius: 99px; }
 
   .log-box {
     background: #0d0d14;
     border: 1px solid var(--border);
     border-radius: 8px;
-    padding: 0.8rem 1rem;
+    padding: 0.7rem 0.9rem;
     font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     color: var(--muted);
-    max-height: 80px;
+    max-height: 100px;
     overflow-y: auto;
-    line-height: 1.6;
+    line-height: 1.7;
   }
+  .log-box::-webkit-scrollbar { width: 2px; }
+  .log-box::-webkit-scrollbar-thumb { background: var(--border); }
+  .log-info    { color: var(--accent2); }
+  .log-success { color: var(--success); }
+  .log-error   { color: var(--error); }
 
-  .log-box p { margin: 0; }
-  .log-box p.info { color: var(--accent2); }
-  .log-box p.success { color: var(--success); }
-  .log-box p.err { color: var(--error); }
-
-  /* Buttons */
-  .btn-row {
-    display: flex;
-    gap: 0.75rem;
-    margin-top: 1.2rem;
-  }
-
-  .btn {
-    flex: 1;
-    padding: 0.9rem 1.5rem;
-    border-radius: 8px;
-    font-family: 'Syne', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 700;
-    cursor: pointer;
-    border: none;
-    transition: opacity 0.15s, transform 0.1s;
-    letter-spacing: 0.02em;
-  }
-
-  .btn:active { transform: scale(0.98); }
-  .btn:disabled { opacity: 0.35; cursor: not-allowed; }
-
-  .btn-primary {
-    background: var(--accent);
-    color: #0a0a0f;
-  }
-
-  .btn-primary:hover:not(:disabled) { opacity: 0.88; }
-
-  .btn-secondary {
-    background: var(--surface);
-    color: var(--text);
-    border: 1px solid var(--border);
-  }
-
-  .btn-secondary:hover:not(:disabled) { border-color: var(--muted); }
-
-  /* Download card */
   .download-card {
     display: none;
     align-items: center;
-    justify-content: space-between;
     gap: 1rem;
     padding: 1rem 1.2rem;
     background: rgba(71,255,138,0.06);
     border: 1px solid rgba(71,255,138,0.25);
     border-radius: 10px;
-    margin-top: 1rem;
   }
+  .download-card.show { display: flex; }
+  .dl-info { flex: 1; min-width: 0; }
+  .dl-title { font-size: 0.8rem; color: var(--success); font-weight: 700; margin-bottom: 0.15rem; }
+  .dl-name { font-size: 0.72rem; color: var(--muted); font-family: 'Space Mono', monospace; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .btn-dl { background: var(--success); color: #0a0a0f; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem; border: none; border-radius: 7px; padding: 0.6rem 1.1rem; cursor: pointer; white-space: nowrap; transition: opacity 0.15s; }
+  .btn-dl:hover { opacity: 0.85; }
 
-  .download-card.visible { display: flex; }
+  .btn-row { display: flex; gap: 0.75rem; }
+  .btn { flex: 1; padding: 0.85rem 1.4rem; border-radius: 8px; font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; cursor: pointer; border: none; transition: opacity 0.15s, transform 0.1s; }
+  .btn:active { transform: scale(0.98); }
+  .btn:disabled { opacity: 0.3; cursor: not-allowed; }
+  .btn-primary { background: var(--accent); color: #0a0a0f; }
+  .btn-primary:hover:not(:disabled) { opacity: 0.85; }
+  .btn-secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+  .btn-secondary:hover:not(:disabled) { border-color: var(--muted); }
 
-  .download-info { flex: 1; min-width: 0; }
-
-  .download-title {
-    font-size: 0.8rem;
-    color: var(--success);
-    font-weight: 700;
-    margin-bottom: 0.2rem;
-  }
-
-  .download-name {
-    font-size: 0.75rem;
-    color: var(--muted);
-    font-family: 'Space Mono', monospace;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .btn-download {
-    background: var(--success);
-    color: #0a0a0f;
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 0.8rem;
-    border: none;
-    border-radius: 7px;
-    padding: 0.6rem 1.1rem;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: opacity 0.15s;
-    flex-shrink: 0;
-  }
-
-  .btn-download:hover { opacity: 0.85; }
-
-  /* Loading ffmpeg notice */
-  .ffmpeg-notice {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--muted);
-    text-align: center;
-    padding-top: 1.5rem;
-  }
-
-  .ffmpeg-notice span { color: var(--accent2); }
-
-  /* Scrollbar */
-  .log-box::-webkit-scrollbar { width: 3px; }
-  .log-box::-webkit-scrollbar-track { background: transparent; }
-  .log-box::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+  .footer-note { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--muted); text-align: center; }
+  .footer-note span { color: var(--accent2); }
 </style>
 </head>
 <body>
 
 <div class="wrapper">
   <header>
-    <div class="tag">Client-side · No upload · Private</div>
+    <div class="tag">Lokal · Kein Upload · Privat</div>
     <h1>AVI <span>→</span> MP4</h1>
-    <p class="subtitle">Convert AVI videos to MP4 directly in your browser.</p>
+    <p class="subtitle">Konvertierung direkt im Browser — deine Datei verlässt niemals deinen Computer.</p>
   </header>
 
   <div class="drop-zone" id="dropZone">
-    <input type="file" id="fileInput" accept=".avi,video/avi,video/x-msvideo" />
+    <input type="file" id="fileInput" accept=".avi,video/avi,video/x-msvideo,video/*" />
     <div class="drop-icon">🎬</div>
-    <div class="drop-label">Drop your AVI file here</div>
-    <div class="drop-hint">or click to browse — stays on your device</div>
+    <div class="drop-label">AVI-Datei hier ablegen</div>
+    <div class="drop-hint">oder klicken zum Auswählen</div>
   </div>
 
   <div class="file-info" id="fileInfo">
@@ -361,255 +197,231 @@
       <div class="file-name" id="fileName">—</div>
       <div class="file-size" id="fileSize">—</div>
     </div>
-    <button class="remove-btn" id="removeBtn" title="Remove file">✕</button>
+    <button class="remove-btn" id="removeBtn">✕</button>
   </div>
 
-  <div class="progress-area" id="progressArea">
-    <div class="progress-header">
-      <span class="progress-label" id="progressLabel">Initialising…</span>
-      <span class="progress-pct" id="progressPct">0%</span>
+  <div class="status-box" id="statusBox">
+    <div class="status-row">
+      <span class="status-label" id="statusLabel">Bereit</span>
+      <span class="status-pct" id="statusPct">0%</span>
     </div>
-    <div class="progress-bar-bg">
-      <div class="progress-bar-fill" id="progressFill"></div>
-    </div>
+    <div class="progress-bg"><div class="progress-fill" id="progressFill"></div></div>
     <div class="log-box" id="logBox"></div>
   </div>
 
   <div class="download-card" id="downloadCard">
-    <div class="download-info">
-      <div class="download-title">✓ Conversion complete</div>
-      <div class="download-name" id="downloadName">output.mp4</div>
+    <div class="dl-info">
+      <div class="dl-title">✓ Fertig!</div>
+      <div class="dl-name" id="dlName">output.mp4</div>
     </div>
-    <button class="btn-download" id="downloadBtn">Download MP4</button>
+    <button class="btn-dl" id="downloadBtn">⬇ MP4 herunterladen</button>
   </div>
 
   <div class="btn-row">
-    <button class="btn btn-primary" id="convertBtn" disabled>Convert to MP4</button>
-    <button class="btn btn-secondary" id="resetBtn">Reset</button>
+    <button class="btn btn-primary" id="convertBtn" disabled>Konvertieren</button>
+    <button class="btn btn-secondary" id="resetBtn">Zurücksetzen</button>
   </div>
 
-  <div class="ffmpeg-notice">
-    Powered by <span>ffmpeg.wasm</span> — all processing happens locally in your browser.
-  </div>
+  <div class="footer-note">Läuft mit <span>ffmpeg.wasm</span> — vollständig lokal in deinem Browser.</div>
 </div>
 
 <script>
-  // ── FFmpeg.wasm v0.12 via CDN ──────────────────────────────────────────────
-  const FFMPEG_CDN = 'https://cdnjs.cloudflare.com/ajax/libs/ffmpeg/0.12.6/ffmpeg.min.js';
-  const FFMPEG_CORE = 'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.6/dist/umd/ffmpeg-core.js';
+// ─────────────────────────────────────────────────────────────────────────────
+// We load ffmpeg.wasm v0.12 dynamically using ES module + importmap workaround.
+// Because importmap support in standalone HTML files can be inconsistent,
+// we use a dynamic import via a blob URL instead — most reliable approach.
+// ─────────────────────────────────────────────────────────────────────────────
 
-  let ffmpegLoaded = false;
-  let ffmpegInstance = null;
-  let selectedFile = null;
-  let outputUrl = null;
+const UNPKG = 'https://unpkg.com';
+const FF_VER   = '0.12.15';
+const UTIL_VER = '0.12.1';
+const CORE_VER = '0.12.6';
 
-  // Elements
-  const dropZone   = document.getElementById('dropZone');
-  const fileInput  = document.getElementById('fileInput');
-  const fileInfo   = document.getElementById('fileInfo');
-  const fileName   = document.getElementById('fileName');
-  const fileSize   = document.getElementById('fileSize');
-  const removeBtn  = document.getElementById('removeBtn');
-  const progressArea = document.getElementById('progressArea');
-  const progressLabel = document.getElementById('progressLabel');
-  const progressPct   = document.getElementById('progressPct');
-  const progressFill  = document.getElementById('progressFill');
-  const logBox     = document.getElementById('logBox');
-  const downloadCard = document.getElementById('downloadCard');
-  const downloadName = document.getElementById('downloadName');
-  const downloadBtn  = document.getElementById('downloadBtn');
-  const convertBtn = document.getElementById('convertBtn');
-  const resetBtn   = document.getElementById('resetBtn');
+let ffmpeg = null;
+let loaded = false;
+let selectedFile = null;
+let outputURL = null;
 
-  // ── Helpers ────────────────────────────────────────────────────────────────
-  function fmtBytes(b) {
-    if (b < 1024) return b + ' B';
-    if (b < 1048576) return (b/1024).toFixed(1) + ' KB';
-    return (b/1048576).toFixed(1) + ' MB';
-  }
+// DOM
+const dropZone     = document.getElementById('dropZone');
+const fileInput    = document.getElementById('fileInput');
+const fileInfo     = document.getElementById('fileInfo');
+const fileNameEl   = document.getElementById('fileName');
+const fileSizeEl   = document.getElementById('fileSize');
+const removeBtn    = document.getElementById('removeBtn');
+const statusBox    = document.getElementById('statusBox');
+const statusLabel  = document.getElementById('statusLabel');
+const statusPct    = document.getElementById('statusPct');
+const progressFill = document.getElementById('progressFill');
+const logBox       = document.getElementById('logBox');
+const downloadCard = document.getElementById('downloadCard');
+const dlNameEl     = document.getElementById('dlName');
+const downloadBtn  = document.getElementById('downloadBtn');
+const convertBtn   = document.getElementById('convertBtn');
+const resetBtn     = document.getElementById('resetBtn');
 
-  function log(msg, type = '') {
-    const p = document.createElement('p');
-    if (type) p.className = type;
-    p.textContent = msg;
-    logBox.appendChild(p);
-    logBox.scrollTop = logBox.scrollHeight;
-  }
+const fmtBytes = b => b < 1048576 ? (b/1024).toFixed(1)+' KB' : (b/1048576).toFixed(1)+' MB';
 
-  function setProgress(pct, label) {
-    progressFill.style.width = pct + '%';
-    progressPct.textContent = Math.round(pct) + '%';
-    if (label) progressLabel.textContent = label;
-  }
+function addLog(msg, cls = '') {
+  const p = document.createElement('p');
+  p.textContent = msg;
+  if (cls) p.className = cls;
+  logBox.appendChild(p);
+  logBox.scrollTop = logBox.scrollHeight;
+}
 
-  // ── File selection ──────────────────────────────────────────────────────────
-  function setFile(file) {
-    if (!file) return;
-    if (!file.name.toLowerCase().endsWith('.avi') && !file.type.includes('avi')) {
-      log('⚠ Please select an AVI file.', 'err');
-      progressArea.classList.add('visible');
-      return;
-    }
-    selectedFile = file;
-    fileName.textContent = file.name;
-    fileSize.textContent = fmtBytes(file.size);
-    fileInfo.classList.add('visible');
+function setProgress(pct, label) {
+  progressFill.style.width = Math.min(100, pct) + '%';
+  statusPct.textContent = Math.round(Math.min(100, pct)) + '%';
+  if (label) statusLabel.textContent = label;
+}
+
+function applyFile(file) {
+  if (!file) return;
+  selectedFile = file;
+  fileNameEl.textContent = file.name;
+  fileSizeEl.textContent = fmtBytes(file.size);
+  fileInfo.classList.add('show');
+  convertBtn.disabled = false;
+  downloadCard.classList.remove('show');
+  statusBox.classList.remove('show');
+  logBox.innerHTML = '';
+  if (outputURL) { URL.revokeObjectURL(outputURL); outputURL = null; }
+}
+
+fileInput.addEventListener('change', e => applyFile(e.target.files[0]));
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault(); dropZone.classList.remove('dragover');
+  applyFile(e.dataTransfer.files[0]);
+});
+removeBtn.addEventListener('click', () => {
+  selectedFile = null; fileInput.value = '';
+  fileInfo.classList.remove('show'); convertBtn.disabled = true;
+});
+resetBtn.addEventListener('click', () => {
+  selectedFile = null; fileInput.value = '';
+  fileInfo.classList.remove('show');
+  statusBox.classList.remove('show');
+  downloadCard.classList.remove('show');
+  convertBtn.disabled = true;
+  logBox.innerHTML = '';
+  if (outputURL) { URL.revokeObjectURL(outputURL); outputURL = null; }
+});
+
+// ── Dynamic ESM loader ────────────────────────────────────────────────────────
+async function loadFFmpegESM() {
+  // Build a small ESM loader blob that imports from unpkg
+  const loaderSrc = `
+    import { FFmpeg } from '${UNPKG}/@ffmpeg/ffmpeg@${FF_VER}/dist/esm/index.js';
+    import { fetchFile, toBlobURL } from '${UNPKG}/@ffmpeg/util@${UTIL_VER}/dist/esm/index.js';
+    export { FFmpeg, fetchFile, toBlobURL };
+  `;
+  const blob = new Blob([loaderSrc], { type: 'application/javascript' });
+  const url  = URL.createObjectURL(blob);
+  const mod  = await import(url);
+  URL.revokeObjectURL(url);
+  return mod;
+}
+
+async function ensureLoaded() {
+  if (loaded) return;
+
+  addLog('Lade ffmpeg.wasm Bibliothek…', 'log-info');
+  setProgress(2, 'Bibliothek wird heruntergeladen…');
+
+  const { FFmpeg, fetchFile: ff_fetchFile, toBlobURL } = await loadFFmpegESM();
+
+  // Store fetchFile for later use
+  window._ffFetchFile = ff_fetchFile;
+
+  const coreBase = `${UNPKG}/@ffmpeg/core@${CORE_VER}/dist/umd`;
+
+  ffmpeg = new FFmpeg();
+
+  ffmpeg.on('log', ({ message }) => {
+    if (message && message.trim()) addLog(message);
+  });
+
+  ffmpeg.on('progress', ({ progress }) => {
+    setProgress(10 + progress * 85, 'Konvertiere…');
+  });
+
+  addLog('Lade WASM-Core…', 'log-info');
+  setProgress(5, 'WASM-Core wird geladen…');
+
+  await ffmpeg.load({
+    coreURL: await toBlobURL(`${coreBase}/ffmpeg-core.js`,   'text/javascript'),
+    wasmURL: await toBlobURL(`${coreBase}/ffmpeg-core.wasm`, 'application/wasm'),
+  });
+
+  loaded = true;
+  addLog('FFmpeg bereit ✓', 'log-success');
+}
+
+// ── Convert ───────────────────────────────────────────────────────────────────
+convertBtn.addEventListener('click', async () => {
+  if (!selectedFile) return;
+  convertBtn.disabled = true;
+  downloadCard.classList.remove('show');
+  statusBox.classList.add('show');
+  logBox.innerHTML = '';
+  setProgress(0, 'Starte…');
+
+  try {
+    await ensureLoaded();
+
+    addLog('Datei wird eingelesen…', 'log-info');
+    setProgress(6, 'Eingabedatei wird vorbereitet…');
+
+    const inputData = await window._ffFetchFile(selectedFile);
+    await ffmpeg.writeFile('input.avi', inputData);
+
+    addLog('FFmpeg-Konvertierung läuft (H.264 + AAC)…', 'log-info');
+    setProgress(10, 'Konvertiere…');
+
+    await ffmpeg.exec([
+      '-i',        'input.avi',
+      '-c:v',      'libx264',
+      '-preset',   'fast',
+      '-crf',      '23',
+      '-c:a',      'aac',
+      '-b:a',      '128k',
+      '-movflags', '+faststart',
+      'output.mp4'
+    ]);
+
+    addLog('Ausgabedatei wird gelesen…', 'log-info');
+    setProgress(97, 'Abschließen…');
+
+    const data = await ffmpeg.readFile('output.mp4');
+    const blob = new Blob([data.buffer], { type: 'video/mp4' });
+    if (outputURL) URL.revokeObjectURL(outputURL);
+    outputURL = URL.createObjectURL(blob);
+
+    const outName = selectedFile.name.replace(/\.[^.]+$/, '') + '.mp4';
+    dlNameEl.textContent = outName;
+    downloadBtn.onclick = () => {
+      const a = document.createElement('a');
+      a.href = outputURL; a.download = outName; a.click();
+    };
+
+    downloadCard.classList.add('show');
+    setProgress(100, 'Fertig!');
+    addLog('✓ Konvertierung erfolgreich!', 'log-success');
+
+    await ffmpeg.deleteFile('input.avi').catch(() => {});
+    await ffmpeg.deleteFile('output.mp4').catch(() => {});
+
+  } catch (err) {
+    addLog('Fehler: ' + err.message, 'log-error');
+    setProgress(0, 'Fehler aufgetreten');
+    console.error(err);
+  } finally {
     convertBtn.disabled = false;
-    downloadCard.classList.remove('visible');
-    logBox.innerHTML = '';
-    progressArea.classList.remove('visible');
-    if (outputUrl) { URL.revokeObjectURL(outputUrl); outputUrl = null; }
   }
-
-  fileInput.addEventListener('change', e => setFile(e.target.files[0]));
-
-  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
-  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
-  dropZone.addEventListener('drop', e => {
-    e.preventDefault();
-    dropZone.classList.remove('dragover');
-    setFile(e.dataTransfer.files[0]);
-  });
-
-  removeBtn.addEventListener('click', () => {
-    selectedFile = null;
-    fileInfo.classList.remove('visible');
-    convertBtn.disabled = true;
-    fileInput.value = '';
-  });
-
-  // ── Reset ───────────────────────────────────────────────────────────────────
-  resetBtn.addEventListener('click', () => {
-    selectedFile = null;
-    fileInfo.classList.remove('visible');
-    progressArea.classList.remove('visible');
-    downloadCard.classList.remove('visible');
-    convertBtn.disabled = true;
-    fileInput.value = '';
-    logBox.innerHTML = '';
-    if (outputUrl) { URL.revokeObjectURL(outputUrl); outputUrl = null; }
-  });
-
-  // ── Load FFmpeg ──────────────────────────────────────────────────────────────
-  async function loadFFmpeg() {
-    if (ffmpegLoaded) return ffmpegInstance;
-
-    log('Loading FFmpeg WebAssembly…', 'info');
-    setProgress(5, 'Loading FFmpeg…');
-
-    // Load ffmpeg.min.js from cdnjs
-    await new Promise((res, rej) => {
-      const s = document.createElement('script');
-      s.src = FFMPEG_CDN;
-      s.onload = res;
-      s.onerror = () => rej(new Error('Failed to load ffmpeg.min.js from CDN'));
-      document.head.appendChild(s);
-    });
-
-    const { FFmpeg } = window.FFmpegWASM || window;
-    // ffmpeg.wasm v0.12 exports differently; handle both
-    const FFmpegClass = (typeof FFmpeg === 'function') ? FFmpeg
-      : (window.FFmpegWASM && window.FFmpegWASM.FFmpeg)
-      ? window.FFmpegWASM.FFmpeg
-      : null;
-
-    if (!FFmpegClass) {
-      // Fallback: try the @ffmpeg/ffmpeg UMD global
-      throw new Error('FFmpeg class not found on window. Check CDN.');
-    }
-
-    ffmpegInstance = new FFmpegClass();
-
-    ffmpegInstance.on('log', ({ message }) => {
-      log(message);
-    });
-
-    ffmpegInstance.on('progress', ({ progress }) => {
-      const pct = Math.min(99, 10 + progress * 89);
-      setProgress(pct, 'Converting…');
-    });
-
-    await ffmpegInstance.load({ coreURL: FFMPEG_CORE });
-
-    ffmpegLoaded = true;
-    log('FFmpeg ready.', 'success');
-    return ffmpegInstance;
-  }
-
-  // ── Convert ──────────────────────────────────────────────────────────────────
-  convertBtn.addEventListener('click', async () => {
-    if (!selectedFile) return;
-
-    convertBtn.disabled = true;
-    downloadCard.classList.remove('visible');
-    progressArea.classList.add('visible');
-    logBox.innerHTML = '';
-    setProgress(0, 'Starting…');
-
-    try {
-      const ff = await loadFFmpeg();
-      const { fetchFile } = window.FFmpegWASM || window;
-
-      // fetchFile helper — may live on namespace or need manual fetch
-      let inputData;
-      if (typeof fetchFile === 'function') {
-        inputData = await fetchFile(selectedFile);
-      } else {
-        const buf = await selectedFile.arrayBuffer();
-        inputData = new Uint8Array(buf);
-      }
-
-      log('Writing input file…', 'info');
-      setProgress(8, 'Writing input…');
-      await ff.writeFile('input.avi', inputData);
-
-      log('Running FFmpeg conversion…', 'info');
-      setProgress(10, 'Converting…');
-
-      await ff.exec([
-        '-i', 'input.avi',
-        '-c:v', 'libx264',
-        '-preset', 'fast',
-        '-crf', '23',
-        '-c:a', 'aac',
-        '-b:a', '128k',
-        '-movflags', '+faststart',
-        'output.mp4'
-      ]);
-
-      log('Reading output…', 'info');
-      setProgress(99, 'Finalising…');
-
-      const data = await ff.readFile('output.mp4');
-      const blob = new Blob([data.buffer], { type: 'video/mp4' });
-      if (outputUrl) URL.revokeObjectURL(outputUrl);
-      outputUrl = URL.createObjectURL(blob);
-
-      const outName = selectedFile.name.replace(/\.avi$/i, '.mp4');
-      downloadName.textContent = outName;
-      downloadBtn.onclick = () => {
-        const a = document.createElement('a');
-        a.href = outputUrl;
-        a.download = outName;
-        a.click();
-      };
-
-      downloadCard.classList.add('visible');
-      setProgress(100, 'Done!');
-      log('✓ Conversion successful!', 'success');
-
-      // Cleanup
-      await ff.deleteFile('input.avi');
-      await ff.deleteFile('output.mp4');
-
-    } catch (err) {
-      log('Error: ' + err.message, 'err');
-      setProgress(0, 'Error');
-      console.error(err);
-    } finally {
-      convertBtn.disabled = false;
-    }
-  });
+});
 </script>
 </body>
 </html>
